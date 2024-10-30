@@ -1,0 +1,163 @@
+ScreenManager:
+    LoginScreen:
+    RegisterScreen:
+    MainInterfaceScreen:
+
+<LoginScreen>:
+    name: "login"
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+        spacing: 20
+        canvas.before:
+            Color:
+                rgba: 0.15, 0.2, 0.3, 1  # Dark background for login screen
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "Login to Recipe Organizer"
+            font_size: 24
+            color: 1, 1, 1, 1
+
+        TextInput:
+            id: username_input
+            hint_text: "Username"
+            multiline: False
+            font_size: 18
+            size_hint_y: None
+            height: 50
+            background_color: 0.8, 0.8, 0.9, 1  # Light background for input
+            foreground_color: 0.1, 0.2, 0.3, 1  # Dark text color
+            padding: [10, 10]
+            hint_text_color: 0.5, 0.5, 0.7, 1  # Soft color for hint text
+
+        TextInput:
+            id: password_input
+            hint_text: "Password"
+            multiline: False
+            font_size: 18
+            size_hint_y: None
+            height: 50
+            background_color: 0.8, 0.8, 0.9, 1  # Light background for input
+            foreground_color: 0.1, 0.2, 0.3, 1  # Dark text color
+            password: True
+            padding: [10, 10]
+            hint_text_color: 0.5, 0.5, 0.7, 1  # Soft color for hint text
+
+        Button:
+            text: "Login"
+            size_hint_y: None
+            height: 50
+            on_release: root.validate_login()
+
+        Label:
+            id: login_error
+            text: ""
+            font_size: 16
+            color: 1, 0, 0, 1  # Red color for error message
+
+        Button:
+            text: "Create Account"
+            size_hint_y: None
+            height: 50
+            on_release: root.go_to_register()
+
+<RegisterScreen>:
+    name: "register"
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+        spacing: 20
+        canvas.before:
+            Color:
+                rgba: 0.15, 0.2, 0.3, 1  # Dark background for registration screen
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "Create Account"
+            font_size: 24
+            color: 1, 1, 1, 1
+
+        TextInput:
+            id: new_username_input
+            hint_text: "Username"
+            multiline: False
+            font_size: 18
+            size_hint_y: None
+            height: 50
+            background_color: 0.8, 0.8, 0.9, 1  # Light background for input
+            foreground_color: 0.1, 0.2, 0.3, 1  # Dark text color
+            padding: [10, 10]
+            hint_text_color: 0.5, 0.5, 0.7, 1  # Soft color for hint text
+
+        TextInput:
+            id: new_password_input
+            hint_text: "Password"
+            multiline: False
+            font_size: 18
+            size_hint_y: None
+            height: 50
+            background_color: 0.8, 0.8, 0.9, 1  # Light background for input
+            foreground_color: 0.1, 0.2, 0.3, 1  # Dark text color
+            password: True
+            padding: [10, 10]
+            hint_text_color: 0.5, 0.5, 0.7, 1  # Soft color for hint text
+
+        TextInput:
+            id: confirm_password_input
+            hint_text: "Confirm Password"
+            multiline: False
+            font_size: 18
+            size_hint_y: None
+            height: 50
+            background_color: 0.8, 0.8, 0.9, 1  # Light background for input
+            foreground_color: 0.1, 0.2, 0.3, 1  # Dark text color
+            password: True
+            padding: [10, 10]
+            hint_text_color: 0.5, 0.5, 0.7, 1  # Soft color for hint text
+
+        Button:
+            text: "Register"
+            size_hint_y: None
+            height: 50
+            on_release: root.register_account()
+
+        Label:
+            id: register_error
+            text: ""
+            font_size: 16
+            color: 1, 0, 0, 1  # Red color for error message
+
+<MainInterfaceScreen>:
+    name: "main_interface"
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 0.1, 0.2, 0.3, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "Welcome to the Recipe Organizer Main Interface"
+            font_size: 24
+            color: 1, 1, 1, 1
+
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 20
+            spacing: 20
+            Button:
+                text: "Add Recipe"
+                on_release: app.root.current = "add_recipe"
+            Button:
+                text: "View Recipes"
+                on_release: app.root.current = "view_recipes"
+            Button:
+                text: "Search Recipes"
+                on_release: app.root.current = "search_recipes"
