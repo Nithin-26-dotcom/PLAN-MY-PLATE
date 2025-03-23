@@ -1,0 +1,979 @@
+ScreenManager:
+    LoginScreen:
+    RegisterScreen:
+    MainInterfaceScreen:
+    AddRecipeScreen:
+    HomeScreen:
+    AccountDetailsScreen:
+    RecipeDetailsScreen:
+    AIGenScreen:
+    FavouritesScreen:
+
+<LoginScreen>:
+    name: "login"
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+        spacing: 20
+        canvas.before:
+            Color:
+                rgba: 0.98, 0.96, 0.91, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "Login to PlanMyPlate!"
+            font_size: 20
+            color: 0.3, 0.2, 0.1, 1  
+            font_name: r"Hind\Hind-Bold.ttf"
+
+        TextInput:
+            id: username_input
+            hint_text: "Username"
+            multiline: False
+            font_size: 18
+            size_hint_y: None
+            height: 50
+            background_color: 0.98, 0.96, 0.91, 1  
+            foreground_color: 0.2, 0.2, 0.1, 1  
+            padding: [10, 10]
+            size_hint_x: 0.6
+            pos_hint: {"center_x": 0.5}  
+            hint_text_color: 0.5, 0.4, 0.3, 1  
+
+        TextInput:
+            id: password_input
+            hint_text: "Password"
+            multiline: False
+            font_size: 18
+            size_hint_y: None
+            height: 50
+            background_color: 0.98, 0.96, 0.91, 1  
+            foreground_color: 0.2, 0.2, 0.1, 1  
+            password: True
+            padding: [10, 10]
+            size_hint_x: 0.6
+            pos_hint: {"center_x": 0.5}  
+            hint_text_color: 0.5, 0.4, 0.3, 1  
+
+        Button:
+            text: "Login"
+            size_hint_y: None
+            height: 50
+            size_hint_x: 0.6
+            pos_hint: {"center_x": 0.5}
+            background_normal: ""
+            background_color: 0.82, 0.52, 0.25, 1  
+            color: 1, 1, 1, 1
+            on_release: root.validate_login()
+
+        Label:
+            id: login_error
+            text: ""
+            font_size: 16
+            color: 0.8, 0.1, 0.1, 1 
+        Label:
+            text: "New to Plan My Plate? Sign up Now"
+            font_size: 20
+            color: 0.5, 0.7, 0.4, 1
+            underline: True
+            on_touch_down: if args[1].is_touch and self.collide_point(*args[1].pos): app.root.current = "register"
+
+<RegisterScreen>:
+    name: "register"
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 50
+        spacing: 20
+        canvas.before:
+            Color:
+                rgba:0.98, 0.96, 0.91, 1 
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "Create a New Account!"
+            font_size: 20
+            color: 0.3, 0.2, 0.1, 1  
+            font_name: r"Hind\Hind-Bold.ttf"
+
+        TextInput:
+            id: new_username_input
+            hint_text: "Username"
+            multiline: False
+            font_size: 18
+            size_hint_y: None
+            height: 50
+            background_color: 0.98, 0.96, 0.91, 1  
+            foreground_color: 0.2, 0.2, 0.1, 1   
+            padding: [10, 10]
+            size_hint_x: 0.6
+            pos_hint: {"center_x": 0.5}  
+            hint_text_color: 0.5, 0.4, 0.3, 1   
+
+        TextInput:
+            id: new_password_input
+            hint_text: "Password"
+            multiline: False
+            font_size: 18
+            size_hint_y: None
+            height: 50
+            background_color: 0.98, 0.96, 0.91, 1  
+            foreground_color: 0.2, 0.2, 0.1, 1  
+            password: True
+            padding: [10, 10]
+            size_hint_x: 0.6
+            pos_hint: {"center_x": 0.5}  
+            hint_text_color:  0.5, 0.4, 0.3, 1 
+
+        TextInput:
+            id: confirm_password_input
+            hint_text: "Confirm Password"
+            multiline: False
+            font_size: 18
+            size_hint_y: None
+            height: 50
+            background_color: 0.98, 0.96, 0.91, 1  
+            foreground_color: 0.2, 0.2, 0.1, 1 
+            password: True
+            padding: [10, 10]
+            size_hint_x: 0.6
+            pos_hint: {"center_x": 0.5}  
+            hint_text_color: 0.5, 0.4, 0.3, 1  
+
+        Button:
+            text: "Register"
+            size_hint_y: None
+            height: 50
+            size_hint_x: 0.6
+            pos_hint: {"center_x": 0.5}
+            background_normal: ""
+            background_color: 0.82, 0.52, 0.25, 1  
+            color: 1, 1, 1, 1  
+            on_release: root.register_account()
+
+        Label:
+            id: register_error
+            text: ""
+            font_size: 16
+            color: 0.8, 0.1, 0.1, 1 
+        FloatLayout:
+            Button:
+                text: "Back"
+                size_hint: None, None
+                size: 120, 50
+                pos_hint: {"x": 0.05, "y": 0.05}  
+                background_normal: ""
+                background_color: 0.82, 0.52, 0.25, 1  
+                color: 1, 1, 1, 1  
+                on_release: app.root.current = "login" 
+
+<MainInterfaceScreen>:
+    name: "main_interface"
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+        canvas.before:
+            Color:
+                rgba: 0.98, 0.96, 0.91, 1  
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            spacing: 5
+            padding: [10, 5]
+            canvas:
+                Color:
+                    rgba: 0.8, 0.7, 0.6, 1  
+                Line:
+                    width: 0.5
+                    rectangle: (self.x, self.y, self.width, self.height)
+
+            Button:
+                text: "Home"
+                on_release: root.switch_content("home")
+                background_color: 0, 0, 0, 0
+                background_normal: ""
+                color: 0, 0, 0, 1
+                font_name: r"Hind\Hind-Bold.ttf"
+            Button:
+                text: "Add Recipe"
+                on_release: root.switch_content("add_recipe")
+                background_color: 0, 0, 0, 0
+                color: 0, 0, 0, 1
+                font_name: r"Hind\Hind-Bold.ttf"
+            Button:
+                text: "Favourites"
+                on_release: root.switch_content("favourites")
+                background_color: 0, 0, 0, 0
+                color: 0, 0, 0, 1
+                font_name: r"Hind\Hind-Bold.ttf"
+            Button:
+                text: "A.I. Gen"
+                on_release: root.switch_content("ai_gen")
+                background_color: 0, 0, 0, 0
+                color: 0, 0, 0, 1
+                font_name: r"Hind\Hind-Bold.ttf"
+            Button:
+                text: "Account Details"
+                on_release: root.switch_content("account_details")
+                background_color: 0, 0, 0, 0
+                color: 0, 0, 0, 1
+                font_name: r"Hind\Hind-Bold.ttf"
+
+        BoxLayout:
+            id: content_area
+            padding: 10
+            canvas.before:
+                Color:
+                    rgba: 0.98, 0.96, 0.91, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+<HomeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10  
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 0
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        
+        TextInput:
+            id: search_bar
+            hint_text: "Search recipes"
+            size_hint_y: None
+            height: 40
+            background_color: (0.98, 0.96, 0.91, 1)  
+            foreground_color: (0.2, 0.2, 0.1, 1)
+            on_text: root.update_recipes(self.text)
+
+        Label:
+            text: "Recipes"
+            font_size: 20
+            color: 0.3, 0.2, 0.1, 1  
+            font_name: r"Hind\Hind-Bold.ttf"
+            padding: [10, 10]  
+            halign: 'left'
+            valign: 'middle'
+            size_hint_y: None
+            height:24
+            text_size: self.width, None
+
+        ScrollView:
+            GridLayout:
+                id: recipes_container
+                spacing: 10
+                padding: 10
+                size_hint_y: None
+                height: self.minimum_height
+                row_default_height: 50
+                canvas.before:
+                    Color:
+                        rgba: 0.82, 0.52, 0.25, 0
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size 
+
+<AddRecipeScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: [20, 20, 20, 20]  
+        spacing: 10
+        canvas.before:
+            Color:
+                rgba: 0.98, 0.96, 0.91, 1  
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        
+        Label:
+            text: "Add a New Recipe"
+            font_size: 20
+            color: 0.3, 0.2, 0.1, 1  
+            font_name: r"Hind\Hind-Bold.ttf"
+            padding: [10, 10]  
+            halign: 'left'
+            valign: 'middle'
+            size_hint_y: None
+            height:24
+            text_size: self.width, None
+
+        ScrollView:
+            size_hint_y: None
+            height: self.parent.height - 80  
+            do_scroll_x: False
+            do_scroll_y: True
+
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10
+
+                BoxLayout:
+                    orientation: "vertical"
+                    padding: [10, 10]
+                    size_hint_y: None
+                    height: self.minimum_height
+                    canvas.before:
+                        Color:
+                            rgba: 0.82, 0.52, 0.25, 1  
+                        Line:
+                            width: 2
+                            rectangle: (self.x, self.y, self.width, self.height)
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: 90
+                        padding: 15
+                        canvas:
+                            Color:
+                                rgba: 0.8, 0.7, 0.6, 1  
+                            Line:
+                                width: 2
+                                rectangle: (self.x, self.y, self.width, self.height)
+
+                        Label:
+                            text: "Recipe Title:"
+                            color: 0.3, 0.2, 0.1, 1  
+                            halign: "left"
+                            valign: "top"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            text_size: self.width, None
+
+
+                        TextInput:
+                            id: title_input
+                            hint_text: "Enter the recipe title"
+                            size_hint_y: None
+                            size_hint_x: None
+                            height: 40
+                            width: 800
+                            pos_hint: {"center_x": 0.5}
+                            background_color: 0.98, 0.96, 0.91, 1  
+                            foreground_color: 0.2, 0.2, 0.1, 1   
+                            hint_text_color: 0.5, 0.4, 0.3, 0.6  
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: 160
+                        padding: 10
+                        canvas:
+                            Color:
+                                rgba: 0.8, 0.7, 0.6, 1  
+                            Line:
+                                width: 2
+                                rectangle: (self.x, self.y, self.width, self.height)
+
+                        Label:
+                            text: "Ingredients (one per box):"
+                            color: 0.3, 0.2, 0.1, 1  
+                            halign: "left"
+                            valign: "top"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            text_size: self.width, None
+
+
+                        ScrollView:
+                            size_hint_y: None
+                            height: 80
+                            BoxLayout:
+                                id: ingredients_container
+                                orientation: 'horizontal'
+                                spacing: 10
+                                size_hint_x: None
+                                width: self.minimum_width  
+
+                                TextInput:
+                                    hint_text: "Ingredient 1"
+                                    size_hint_x: None
+                                    width: 100
+                                    height: 40
+                                    background_color: 0.98, 0.96, 0.91, 1  
+                                    foreground_color: 0.2, 0.2, 0.1, 1   
+                                    hint_text_color: 0.5, 0.4, 0.3, 0.6  
+
+                        Button:
+                            text: "Add Ingredient"
+                            size_hint_y: None
+                            size_hint_x: None
+                            height: 30
+                            width: 170 
+                            font_size:18
+                            background_normal: ""  
+                            background_color: 0.25, 0.5, 0.75, 1  
+                            color: 1, 1, 1, 1 
+                            pos_hint: {"center_x": 0.5}  
+                            on_press: root.add_ingredient()
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: 210
+                        padding: 10
+                        canvas:
+                            Color:
+                                rgba: 0.8, 0.7, 0.6, 1  
+                            Line:
+                                width: 2
+                                rectangle: (self.x, self.y, self.width, self.height)
+
+                        Label:
+                            text: "Steps to Prepare:"
+                            color: 0.3, 0.2, 0.1, 1 
+                            halign: "left"
+                            valign: "top"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            text_size: self.width, None
+
+                        ScrollView:
+                            size_hint_y: 0.4
+                            BoxLayout:
+                                id: steps_container
+                                orientation: 'vertical'
+                                size_hint_y: None
+                                height: self.minimum_height
+
+                               
+                                TextInput:
+                                    hint_text: "Step 1"
+                                    multiline: True
+                                    size_hint_y: None
+                                    height: 80
+                                    background_color: 0.98, 0.96, 0.91, 1  
+                                    foreground_color: 0.2, 0.2, 0.1, 1   
+                                    hint_text_color: 0.5, 0.4, 0.3, 0.6  
+                        Button:
+                            text: "Add Another Step"
+                            size_hint_x: None
+                            size_hint_y: None
+                            height: 30
+                            width: 170
+                            font_size: 18
+                            background_normal: ""  
+                            background_color: 0.25, 0.5, 0.75, 1   
+                            color: 1, 1, 1, 1 
+                            pos_hint: {"center_x": 0.5}  
+                            on_press: root.add_step()
+
+                    Button:
+                        text: "Add to Recipes"
+                        size_hint: None, None
+                        height: 40
+                        width: 140
+
+                        pos_hint: {"center_x": 0.5}   
+                        background_normal: ""  
+                        background_color: 0.5, 0.7, 0.4, 1  
+                        color: 1, 1, 1, 1  
+                        on_press: root.finish_recipe()
+
+<FavouritesScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10  
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 0
+            Rectangle:
+                pos: self.pos
+                size: self.size 
+        Label:
+            text: "My Recipes"
+            font_size: 20
+            color: 0.3, 0.2, 0.1, 1  
+            font_name: r"Hind\Hind-Bold.ttf"
+            padding: [10, 10]  
+            halign: 'left'
+            valign: 'middle'
+            size_hint_y: None
+            height:24
+            text_size: self.width, None
+        ScrollView:
+            GridLayout:
+                id: favourites_container
+                spacing: 10
+                padding: 10
+                size_hint_y: None
+                height: self.minimum_height
+                row_default_height: 50
+                canvas.before:
+                    Color:
+                        rgba: 0.82, 0.52, 0.25, 0
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+<AccountDetailsScreen>:
+    name: 'account_details'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [20, 20, 20, 20]
+        spacing: 15
+        
+        Label:
+            text: "Account Details"
+            font_size: 20
+            color: 0.3, 0.2, 0.1, 1  
+            font_name: r"Hind\Hind-Bold.ttf"
+            padding: [10, 10]  
+            halign: 'left'
+            valign: 'middle'
+            size_hint_y: None
+            height:24
+            text_size: self.width, None
+    
+        ScrollView:
+            size_hint_y: None
+            height: self.parent.height - 120  
+            do_scroll_x: False
+            do_scroll_y: True
+            
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10
+
+                BoxLayout:
+                    orientation: "vertical"
+                    padding: [10, 10]
+                    size_hint_y: None
+                    height: self.minimum_height
+                    canvas.before:
+                        Color:
+                            rgba: 0.82, 0.52, 0.25, 1  
+                        Line:
+                            width: 2
+                            rectangle: (self.x, self.y, self.width, self.height)
+
+                    Label:
+                        id: username_label
+                        text: "User: "
+                        color: (0, 0, 0, 1)  
+                        halign: "left"
+                        valign: "top"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+
+                BoxLayout:
+                    orientation: "vertical"
+                    padding: [10, 10]
+                    size_hint_y: None
+                    height: self.minimum_height
+                    canvas.before:
+                        Color:
+                            rgba: 0.82, 0.52, 0.25, 1 
+                        Line:
+                            width: 2
+                            rectangle: (self.x, self.y, self.width, self.height)
+
+                    Label:
+                        id: recipes_label
+                        text: "Your Recipes:"
+                        color: (0, 0, 0, 1)  
+                        halign: "left"
+                        valign: "top"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+
+                    Label:
+                        id: recipes_display
+                        text: ""
+                        color: (0, 0, 0, 1)  
+                        halign: "left"
+                        valign: "top"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+                        
+                    Label:
+                        id: error_label
+                        text: ""
+                        color: (0, 0, 0, 1) 
+                        halign: "left"
+                        valign: "top"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+
+        Button:
+            id: logout_button
+            text: "Logout"
+            size_hint: (None, None)
+            size: (200, 50)
+            pos_hint: {'center_x': 0.5}
+            background_color: (0.2, 0.5, 0.8, 1)
+            color: (1, 1, 1, 1)
+            on_press: app.logout()
+
+<RecipeDetailsScreen>:
+    
+    BoxLayout:
+        orientation: "vertical"
+        padding: [20, 20, 20, 20]  
+        spacing: 10
+        canvas.before:
+            Color:
+                rgba: 0.98, 0.96, 0.91, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "Recipe Info:"
+            font_size: 20
+            color: 0.3, 0.2, 0.1, 1  
+            font_name: r"Hind\Hind-Bold.ttf"
+            padding: [10, 10]  
+            halign: 'left'
+            valign: 'middle'
+            size_hint_y: None
+            height:24
+            text_size: self.width, None
+
+        ScrollView:
+            size_hint_y: None
+            height: self.parent.height - 130  
+            do_scroll_x: False
+            do_scroll_y: True
+            
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10
+
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: [10, 10]
+                    size_hint_y: None
+                    height: self.minimum_height
+                    canvas.before:
+                        Color:
+                            rgba: 0.82, 0.52, 0.25, 1 
+                        Line:
+                            width: 2
+                            rectangle: (self.x, self.y, self.width, self.height)
+
+                    Label:
+                        id: title_label
+                        text: "Recipe Title"
+                        color: (0, 0, 0, 1) 
+                        halign: "left"
+                        valign: "top"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+                    
+                    Button:
+                        id: copy_button
+                        text: "Copy"
+                        size_hint_x: None
+                        width:80
+                        background_normal: ""
+                        background_color: 0.82, 0.52, 0.25, 1
+                        color: 1, 1, 1, 1
+                        on_press: root.copy_to_clipboard()
+                    
+                BoxLayout:
+                    orientation: "vertical"
+                    padding: [10, 10]
+                    size_hint_y: None
+                    height: self.minimum_height
+                    canvas.before:
+                        Color:
+                            rgba: 0.82, 0.52, 0.25, 1   
+                        Line:
+                            width: 2
+                            rectangle: (self.x, self.y, self.width, self.height)
+
+                    Label:
+                        id: ingredients_label
+                        text: "Ingredients list goes here"
+                        color: (0, 0, 0, 1) 
+                        halign: "left"
+                        valign: "top"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+
+                BoxLayout:
+                    orientation: "vertical"
+                    padding: [10, 10]
+                    size_hint_y: None
+                    height: self.minimum_height
+                    canvas.before:
+                        Color:
+                            rgba: 0.82, 0.52, 0.25, 1  
+                        Line:
+                            width: 2
+                            rectangle: (self.x, self.y, self.width, self.height)
+
+                    Label:
+                        id: steps_label
+                        text: "Steps to make the recipe go here"
+                        color: (0, 0, 0, 1)  
+                        halign: "left"
+                        valign: "top"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+
+                BoxLayout:
+                    orientation:"horizontal"
+                    size_hint_y: None
+                    height: 50
+                    padding: [10, 10] 
+                    spacing: 15
+                    size_hint_y: None
+                    height: self.minimum_height
+                    canvas.before:
+                        Color:
+                            rgba: 0.82, 0.52, 0.25, 1 
+                        Line:
+                            width: 2
+                            rectangle: (self.x, self.y, self.width, self.height)
+                    
+                    Label:
+                        id: read_label
+                        text: "Listen the Recipe: "
+                        color: (0, 0, 0, 1) 
+                        halign: "left"
+                        valign: "top"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+
+                    Button:
+                        text: "Read Aloud"
+                        size_hint: None,None
+                        height : 30
+                        width:100
+                        background_normal: ""
+                        background_color: 0.255, 0.412, 0.882, 1
+                        color: 1, 1, 1, 1
+                        on_press: root.read_aloud()  
+
+                    Button:
+                        text: "Stop Reading"
+                        size_hint: None,None
+                        height : 30
+                        width:150
+                        background_normal: ""
+                        background_color: 1, 0, 0, 1
+                        color: 1, 1, 1, 1
+                        on_press: root.stop_reading()
+
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: [10, 10]
+                    size_hint_y: None
+                    height: 60
+
+                    TextInput:
+                        id: people_input
+                        hint_text: "Enter number of people"
+                        size_hint_x: 0.9  
+                        background_color: (0.98, 0.96, 0.91, 1) 
+                        foreground_color: (0.2, 0.2, 0.1, 1)  
+                        hint_text_color: (0.5, 0.4, 0.3, 0.6) 
+
+
+                    Button:
+                        text: "Update Ingredients"
+                        size_hint_x: 0.3  
+                        background_normal: ""
+                        background_color: 0.82, 0.52, 0.25, 1  
+                        color: 1, 1, 1, 1 
+                        on_press: root.update_ingredients_for_n_people()
+                
+                BoxLayout:
+                    orientation: "horizontal"
+                    padding: [10, 10]
+                    size_hint_y: None
+                    height: 60
+
+                    Button:
+                        text: "Calculate Calories"
+                        on_release: root.calculate_calories()
+                        size_hint_x: 0.3  
+                        background_normal: ""
+                        background_color:0.82, 0.52, 0.25, 0.9
+                        color: 1, 1, 1, 1 
+
+                    Label:
+                        id: calories_label
+                        text: ""
+                        color: 0, 0.5, 0, 1  
+                        canvas.before:
+                            Color:
+                                rgba: 0.82, 0.52, 0.25, 1  
+                            Line:
+                                width: 2
+                                rectangle: (self.x, self.y, self.width, 38)
+                    
+                    
+                Label:
+                    id: message_label
+                    text: ""
+                    size_hint_y: None
+                    height: 30
+                    color: 1, 0, 0, 1 
+
+        FloatLayout:
+            size_hint_y: None
+            height: 60  
+            Button:
+                text: "Back"
+                size_hint: None, None
+                size: 120, 50
+                pos_hint: {"x": 0.05, "y": 0.05}  
+                background_normal: ""
+                background_color: 0.82, 0.52, 0.25, 1  
+                color: 1, 1, 1, 1 
+                on_press:calories_label.text=""
+                on_release: app.root.current = "main_interface"
+            Button:
+                text: "Add to Favourites"
+                size_hint: None, None
+                size: 160, 50
+                pos_hint: {"x": 0.8, "y": 0.05} 
+                background_normal: ""
+                background_color: 0.5, 0.8, 0.2, 1  
+                color: 1, 1, 1, 1 
+                on_release: root.add_to_favourites()
+
+<AIGenScreen>:
+    name: 'ai_gen'
+    BoxLayout:
+        orientation: "vertical"
+        padding: [20, 20, 20, 20]  
+        spacing: 10
+        canvas.before:
+            Color:
+                rgba: 0.98, 0.96, 0.91, 1  
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            text: "Cook a Recipe!"
+            font_size: 20
+            color: 0.3, 0.2, 0.1, 1  
+            font_name: r"Hind\Hind-Bold.ttf"
+            padding: [10, 10]  
+            halign: 'left'
+            valign: 'middle'
+            size_hint_y: None
+            height:24
+            text_size: self.width, None
+
+        ScrollView:
+            size_hint_y: None
+            height: self.parent.height - 80  
+            do_scroll_x: False
+            do_scroll_y: True
+
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10
+
+                BoxLayout:
+                    orientation: "vertical"
+                    padding: [10, 10]
+                    size_hint_y: None
+                    height: self.minimum_height
+                    canvas.before:
+                        Color:
+                            rgba: 0.82, 0.52, 0.25, 1 
+                        Line:
+                            width: 2
+                            rectangle: (self.x, self.y, self.width, self.height)
+
+                    TextInput:
+                        id: ingredients_input
+                        hint_text: "Enter your ingredients (comma-separated)"
+                        multiline: False
+                        size_hint_y: None
+                        size_hint_x: None
+                        height: 40
+                        width: 800
+                        pos_hint: {"center_x": 0.5}
+                        background_color: (0.98, 0.96, 0.91, 1) 
+                        foreground_color: (0.2, 0.2, 0.1, 1) 
+                        hint_text_color: (0.5, 0.4, 0.3, 0.6)  
+
+                Button:
+                    text: "Generate Recipe"
+                    size_hint: None, None
+                    height: 40
+                    width: 140
+                    background_normal: ""
+                    background_color: 0.82, 0.52, 0.25, 1 
+                    color: 1, 1, 1, 1
+                    pos_hint: {"center_x": 0.5}
+                    on_release: root.generate_recipe()
+
+                BoxLayout:
+                    orientation: "vertical"
+                    padding: [10, 10]
+                    size_hint_y: None
+                    height: self.minimum_height
+                    canvas.before:
+                        Color:
+                            rgba: 0.82, 0.52, 0.25, 1 
+                        Line:
+                            width: 2
+                            rectangle: (self.x, self.y, self.width, self.height)
+
+                    Label:
+                        id: output_label
+                        text: "*Wait for Generated Recipe Output"
+                        color: (0, 0, 0, 1)
+                        halign: "left"
+                        valign: "top"
+                        size_hint_y: None
+                        height: self.texture_size[1] + 10 
+                        text_size: self.width, None
+
+                    Label:
+                        id: steps_output
+                        text: " "
+                        color: (0, 0, 0, 1)  
+                        halign: "left"
+                        valign: "top"
+                        size_hint_y: None
+                        height: self.texture_size[1] + 10 
+                        text_size: self.width, None
+
+                Button:
+                    text: "Save Recipe"
+                    size_hint: None,None
+                    height: 40
+                    width: 140
+                    background_normal: ""
+                    background_color: 0.82, 0.52, 0.25, 1 
+                    color: 1, 1, 1, 1
+                    pos_hint: {"center_x": 0.5}
+                    on_release: root.save_generated_recipe()
